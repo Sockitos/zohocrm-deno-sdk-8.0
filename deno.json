@@ -1,13 +1,18 @@
 {
+  "name": "@Sockitos/zohocrm-deno-sdk-8.0",
+  "version": "2.0.0",
+  "description": "Deno SDK for Zoho CRM",
+  "author": "Zohocrm",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sockitos/zohocrm-deno-sdk-8.0t"
+  },
   "compilerOptions": {
-    "target": "ES2020",
     "strict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": false,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "noImplicitOverride": false,
     "noImplicitAny": false
   },
@@ -22,7 +27,6 @@
     "test": "deno test --allow-all",
     "build": "deno compile --allow-all index.ts",
     "dev": "deno run --allow-all --watch index.ts",
-    "fix-imports": "deno run --allow-read --allow-write fix-imports.ts",
     "check": "deno check **/*.ts",
     "fmt": "deno fmt",
     "lint": "deno lint"
@@ -39,11 +43,5 @@
     "semiColons": true,
     "singleQuote": false,
     "proseWrap": "preserve"
-  },
-  "permissions": {
-    "net": true,
-    "read": true,
-    "write": true,
-    "env": true
   }
 }
