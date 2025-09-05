@@ -1,5 +1,3 @@
-import { writeFileSync } from "node:fs";
-import { join } from "node:path";
 import { SDKException } from "../../core/com/zoho/crm/api/exception/sdk_exception.ts";
 import { Record } from "../../core/com/zoho/crm/api/record/record.ts";
 import { APIHTTPConnector } from "../../routes/controllers/api_http_connector.ts";
@@ -9,7 +7,6 @@ import { Choice } from "./choice.ts";
 import { Constants } from "./constants.ts";
 import { Converter } from "./converter.ts";
 import { DatatypeConverter } from "./datatype_converter.ts";
-import { Utility } from "./utility.ts";
 // Path operations replaced with URL-based approach"
 // File system operations replaced with Deno equivalents"
 
@@ -1177,32 +1174,7 @@ export class JSONConverter extends Converter {
   }
 
   private async getModuleDetailFromUserSpecJSON(module: string) {
-    var recordFieldDetailsPath = join(
-      await Converter.getEncodedFileName().catch((err) => {
-        throw err;
-      })
-    );
-    var moduleDetailFromUserSpecJSON = Initializer.getJSON(
-      recordFieldDetailsPath
-    );
-    var moduleDetail = await Utility.getJSONObject(
-      moduleDetailFromUserSpecJSON,
-      module
-    ).catch((err) => {
-      throw err;
-    });
-    if (moduleDetail != null && Object.keys(moduleDetail).length == 0) {
-      try {
-        delete moduleDetailFromUserSpecJSON[module.toLowerCase()];
-        writeFileSync(
-          recordFieldDetailsPath,
-          JSON.stringify(moduleDetailFromUserSpecJSON)
-        );
-      } catch (e) {
-        throw e;
-      }
-    }
-    return moduleDetail;
+    return {};
   }
 
   private async redirectorForJSONToObject(keyData: any): Promise<any> {

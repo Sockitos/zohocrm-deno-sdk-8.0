@@ -1,6 +1,4 @@
-import * as fs from "node:fs";
 import path from "node:path";
-import { SDKException } from "../core/com/zoho/crm/api/exception/sdk_exception.ts";
 import { FileStore } from "../models/authenticator/store/file_store.ts";
 import { TokenStore } from "../models/authenticator/store/token_store.ts";
 import { Token } from "../models/authenticator/token.ts";
@@ -20,7 +18,6 @@ export class InitializeBuilder {
   private _environment: Environment;
   private _store: TokenStore;
   private _token: Token;
-  private _resourcePath: string;
   private _requestProxy: RequestProxy | undefined;
   private _sdkConfig: SDKConfig;
   private _logger: LoggerFile.Logger;
@@ -59,9 +56,6 @@ export class InitializeBuilder {
     if (this._sdkConfig == null) {
       this._sdkConfig = new SDKConfigBuilder().build();
     }
-    if (this._resourcePath == null) {
-      this._resourcePath = new URL("../../../../../", import.meta.url).pathname;
-    }
     if (this._logger == null) {
       this._logger = new LogBuilder().level(Levels.OFF).filePath(null).build();
     }
@@ -70,7 +64,6 @@ export class InitializeBuilder {
       this._token,
       this._store,
       this._sdkConfig,
-      this._resourcePath,
       this._logger,
       this._requestProxy
     );
@@ -112,17 +105,6 @@ export class InitializeBuilder {
 
   public requestProxy(requestProxy: RequestProxy): InitializeBuilder {
     this._requestProxy = requestProxy;
-    return this;
-  }
-
-  public resourcePath(resourcePath: string): InitializeBuilder {
-    if (resourcePath != null && !fs.statSync(resourcePath).isDirectory()) {
-      throw new SDKException(
-        this.errorMessage,
-        Constants.RESOURCE_PATH_INVALID_ERROR_MESSAGE
-      );
-    }
-    this._resourcePath = resourcePath;
     return this;
   }
 

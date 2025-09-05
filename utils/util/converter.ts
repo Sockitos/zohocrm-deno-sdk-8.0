@@ -4,9 +4,6 @@ import { CommonAPIHandler } from "../../routes/middlewares/common_api_handler.ts
 import { Choice } from "./choice.ts";
 import { Constants } from "./constants.ts";
 // Path operations replaced with URL-based approach
-import { Buffer } from "node:buffer";
-import path from "node:path";
-import { OAuthToken } from "../../models/authenticator/oauth_token.ts";
 
 /**
  * This class is to construct API request and response.
@@ -368,46 +365,6 @@ export abstract class Converter {
         );
       }
     }
-  }
-
-  /**
-   * getEncodedFileName
-   */
-  public static async getEncodedFileName() {
-    let initializer = await Initializer.getInitializer().catch((err) => {
-      throw err;
-    });
-    let token = initializer.getToken();
-    let accessToken: string | null = "";
-    let refreshToken: string | null = "";
-    let tokenKey: string | null = "";
-    if (token instanceof OAuthToken) {
-      let user = token.getUserSignature();
-      if (user != null) {
-        tokenKey = user.getName();
-      } else {
-        refreshToken = token.getRefreshToken();
-        if (refreshToken != null && refreshToken.length > 0) {
-          tokenKey = refreshToken.substring(refreshToken.length - 32);
-        } else {
-          accessToken = token.getAccessToken();
-          if (accessToken != null && accessToken.length > 0) {
-            tokenKey = accessToken.substring(accessToken.length - 32);
-          }
-        }
-      }
-    }
-    let fileName: string = initializer.getEnvironment().getUrl();
-    if (tokenKey != null && tokenKey.length > 0) {
-      fileName = fileName + tokenKey;
-    }
-    var input = this.toUTF8Array(fileName);
-    var str: string = Buffer.from(input).toString("base64");
-    let filepath: string = path.join(
-      initializer.getResourcePath(),
-      Constants.FIELD_DETAILS_DIRECTORY
-    );
-    return path.join(filepath, str + ".json");
   }
 
   public static toUTF8Array(str: string) {
