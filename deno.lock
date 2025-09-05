@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "npm:@types/node@*": "22.12.0",
     "npm:form-data@3": "3.0.4",
     "npm:got@^11.8.1": "11.8.6",
     "npm:moment-timezone@0.5.43": "0.5.43",
