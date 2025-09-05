@@ -1013,7 +1013,7 @@ export class JSONConverter extends Converter {
       (memberDetail.hasOwnProperty(Constants.STRUCTURE_NAME) &&
         memberDetail[Constants.STRUCTURE_NAME] == Constants.CHOICE_NAMESPACE)
     ) {
-      let Choice = (await import(Constants.CHOICE_PATH)).MasterModel;
+      let Choice = (await import(Constants.CHOICE_PATH + ".ts")).MasterModel;
       memberValue = new Choice(keyData);
     } else if (
       memberDetail.hasOwnProperty(Constants.STRUCTURE_NAME) &&
@@ -1106,7 +1106,7 @@ export class JSONConverter extends Converter {
           let type = subType[Constants.TYPE];
           if (type == Constants.CHOICE_NAMESPACE) {
             for (let response of responses) {
-              let choiceClass = (await import(Constants.CHOICE_PATH + ".js"))
+              let choiceClass = (await import(Constants.CHOICE_PATH + ".ts"))
                 .MasterModel;
               let choiceInstance = new choiceClass(response);
               values.push(choiceInstance);
@@ -1136,7 +1136,8 @@ export class JSONConverter extends Converter {
         var pack = memberDetail[Constants.STRUCTURE_NAME];
         if (pack == Constants.CHOICE_NAMESPACE) {
           for (let response of responses) {
-            let choiceClass = (await import(Constants.CHOICE_PATH)).MasterModel;
+            let choiceClass = (await import(Constants.CHOICE_PATH + ".ts"))
+              .MasterModel;
             let choiceInstance = new choiceClass(response);
             values.push(choiceInstance);
           }
