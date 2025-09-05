@@ -15,7 +15,6 @@ All rights reserved.
    limitations under the License. 
 **/
 
-import * as Logger from "winston";
 // Path operations replaced with URL-based approach
 import { Buffer } from "node:buffer";
 import { SDKException } from "../core/com/zoho/crm/api/exception/sdk_exception.ts";
@@ -88,11 +87,6 @@ export class Initializer {
       initializer._token = token;
       Initializer.initializer = initializer;
       Initializer.LOCAL.set(await initializer.getEncodedKey(), initializer);
-      Logger.info(
-        Constants.INITIALIZATION_SUCCESSFUL.concat(
-          initializer.getEnvironment().getUrl()
-        )
-      );
     } catch (err) {
       if (!(err instanceof SDKException)) {
         err = new SDKException(null, null, null, err);
@@ -153,11 +147,6 @@ export class Initializer {
     initializer._token = token;
     Initializer.LOCAL.set(await initializer.getEncodedKey(), initializer);
     Initializer.initializer = initializer;
-    Logger.info(
-      Constants.INITIALIZATION_SWITCHED.concat(
-        await Initializer.initializer.toString()
-      )
-    );
   }
 
   /**
@@ -213,7 +202,6 @@ export class Initializer {
             null,
             Constants.USER_NOT_FOUND_ERROR_MESSAGE
           );
-          Logger.info(Constants.USER_NOT_FOUND_ERROR, exception);
           throw exception;
         }
       }

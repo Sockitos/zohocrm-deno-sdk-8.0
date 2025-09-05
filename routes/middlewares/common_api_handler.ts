@@ -1,4 +1,3 @@
-import * as Logger from "winston";
 import { SDKException } from "../../core/com/zoho/crm/api/exception/sdk_exception.ts";
 import { Constants } from "../../utils/util/constants.ts";
 import { APIHTTPConnector } from "../controllers/api_http_connector.ts";
@@ -189,7 +188,6 @@ class CommonAPIHandler {
       if (!(error instanceof SDKException)) {
         error = new SDKException(null, null, null, error);
       }
-      Logger.error(Constants.SET_API_URL_EXCEPTION, error);
       throw error;
     }
     connector.setRequestMethod(this.httpMethod);
@@ -206,7 +204,6 @@ class CommonAPIHandler {
       if (!(error instanceof SDKException)) {
         error = new SDKException(null, null, null, error);
       }
-      Logger.error(Constants.AUTHENTICATION_EXCEPTION, error);
       throw error;
     }
     let baseName = className.replace(/\\/gm, "/").split("/");
@@ -244,7 +241,6 @@ class CommonAPIHandler {
         if (!(error instanceof SDKException)) {
           error = new SDKException(null, null, null, error);
         }
-        Logger.error(Constants.FORM_REQUEST_EXCEPTION, error);
         throw error;
       }
       if (requestObject !== null) {
@@ -295,7 +291,6 @@ class CommonAPIHandler {
           }
         }
       } else {
-        Logger.info(Constants.API_ERROR_RESPONSE + response.status.toString());
       }
       return new APIResponse<T>(
         headerMap,
@@ -307,7 +302,6 @@ class CommonAPIHandler {
       if (!(error instanceof SDKException)) {
         error = new SDKException(null, null, null, error);
       }
-      Logger.error(Constants.API_CALL_EXCEPTION, error);
       throw error;
     }
   }

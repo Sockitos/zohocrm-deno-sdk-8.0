@@ -1,5 +1,4 @@
 import * as tunnel from "tunnel";
-import * as Logger from "winston";
 import { Constants } from "../../utils/util/constants.ts";
 import { Converter } from "../../utils/util/converter.ts";
 import { Initializer } from "../initializer.ts";
@@ -189,9 +188,7 @@ export class APIHTTPConnector {
         https: httpsTunnel,
       };
       requestDetails.agent = agents;
-      Logger.info(await this.proxyLog(requestProxy));
     }
-    Logger.info(await this.toString());
     return await fetch(this.url, requestDetails);
   }
 

@@ -1,4 +1,3 @@
-import * as Logger from "winston";
 import { SDKException } from "../../core/com/zoho/crm/api/exception/sdk_exception.ts";
 import { Initializer } from "../../routes/initializer.ts";
 import { UserSignature } from "../../routes/user_signature.ts";
@@ -280,12 +279,10 @@ export class OAuthToken implements Token {
           oauthToken.getRefreshToken() != null &&
           oauthToken.getRefreshToken()!.length > 0
         ) {
-          Logger.info(Constants.ACCESS_TOKEN_USING_REFRESH_TOKEN_MESSAGE);
           await oauthToken.refreshAccessToken(oauthToken, url).catch((err) => {
             throw err;
           });
         } else {
-          Logger.info(Constants.ACCESS_TOKEN_USING_GRANT_TOKEN_MESSAGE);
           await oauthToken.generateAccessToken(oauthToken, url).catch((err) => {
             throw err;
           });
@@ -296,7 +293,6 @@ export class OAuthToken implements Token {
         parseInt(oauthToken.getExpiresIn()) > 0 &&
         this.getTokenExpiry(oauthToken)
       ) {
-        Logger.info(Constants.REFRESH_TOKEN_MESSAGE);
         await oauthToken.refreshAccessToken(oauthToken, url).catch((err) => {
           throw err;
         });
@@ -321,9 +317,7 @@ export class OAuthToken implements Token {
               if (userName != null) {
                 await oauthToken.setUserSignature(new UserSignature(userName));
               }
-            } catch (e) {
-              Logger.error(Constants.API_EXCEPTION, e);
-            }
+            } catch (e) {}
           }
           await store.saveToken(oauthToken).catch((err) => {
             throw err;
@@ -561,9 +555,7 @@ export class OAuthToken implements Token {
         ).catch((err) => {
           throw err;
         });
-        Logger.info(Constants.ID + ":" + id + Constants.REFRESH_TOKEN_REMOVED);
       } else {
-        Logger.warn(Constants.ID + ":" + id + Constants.TOKEN_NOT_FOUND);
       }
       return isRevoke;
     } catch (error) {
