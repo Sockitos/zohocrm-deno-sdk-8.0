@@ -55,7 +55,7 @@ class Utility {
       Constants.OAUTH_HEADER_PREFIX + token
     );
     handlerInstance.setHeader(headerInstance);
-    let ResponseHandler = require.resolve(
+    let ResponseHandler = import.meta.resolve(
       "../../core/com/zoho/crm/api/users/response_handler.ts"
     );
     let response = await handlerInstance
@@ -120,7 +120,7 @@ class Utility {
       Constants.OAUTH_HEADER_PREFIX + token
     );
     handlerInstance.setHeader(headerInstance);
-    let ResponseHandler = require.resolve(
+    let ResponseHandler = import.meta.resolve(
       "../../core/com/zoho/crm/api/org/response_handler.ts"
     );
     let response = await handlerInstance

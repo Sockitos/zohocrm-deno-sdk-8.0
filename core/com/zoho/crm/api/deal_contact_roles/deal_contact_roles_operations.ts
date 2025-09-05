@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import { APIResponse } from "../../../../../../routes/controllers/api_response.ts";
 import { CommonAPIHandler } from "../../../../../../routes/middlewares/common_api_handler.ts";
 import { Param } from "../../../../../../routes/param.ts";
@@ -8,7 +7,6 @@ import { ActionHandler } from "./action_handler.ts";
 import { BodyWrapper } from "./body_wrapper.ts";
 import { ResponseHandler } from "./response_handler.ts";
 
-const require = createRequire(import.meta.url);
 class DealContactRolesOperations {
   /**
    * The method to get associated contact roles
@@ -31,7 +29,7 @@ class DealContactRolesOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setModuleAPIName("Contacts");
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -58,7 +56,7 @@ class DealContactRolesOperations {
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setCategoryMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setParam(paramInstance);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -86,7 +84,7 @@ class DealContactRolesOperations {
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setModuleAPIName("Contacts");
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -118,7 +116,7 @@ class DealContactRolesOperations {
     handlerInstance.setContentType("application/json");
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -145,7 +143,7 @@ class DealContactRolesOperations {
     handlerInstance.setAPIPath(apiPath);
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setCategoryMethod(Constants.REQUEST_METHOD_DELETE);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"

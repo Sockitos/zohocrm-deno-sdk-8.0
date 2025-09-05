@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import { APIResponse } from "../../../../../../routes/controllers/api_response.ts";
 import { Header } from "../../../../../../routes/header.ts";
 import { HeaderMap } from "../../../../../../routes/header_map.ts";
@@ -18,7 +17,6 @@ import { MassUpdateBodyWrapper } from "./mass_update_body_wrapper.ts";
 import { MassUpdateResponseHandler } from "./mass_update_response_handler.ts";
 import { ResponseHandler } from "./response_handler.ts";
 
-const require = createRequire(import.meta.url);
 class RecordOperations {
   private moduleAPIName: string;
   /**
@@ -54,7 +52,7 @@ class RecordOperations {
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -88,7 +86,7 @@ class RecordOperations {
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -119,7 +117,7 @@ class RecordOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -147,7 +145,7 @@ class RecordOperations {
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -176,7 +174,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -205,7 +203,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -232,7 +230,7 @@ class RecordOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -262,7 +260,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -290,7 +288,9 @@ class RecordOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
-    let DeletedRecordsHandler = require.resolve("./deleted_records_handler");
+    let DeletedRecordsHandler = import.meta.resolve(
+      "./deleted_records_handler.ts"
+    );
     return handlerInstance.apiCall<DeletedRecordsHandler>(
       DeletedRecordsHandler,
       "application/json"
@@ -319,7 +319,7 @@ class RecordOperations {
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -343,7 +343,7 @@ class RecordOperations {
     handlerInstance.setAPIPath(apiPath);
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
-    let DownloadHandler = require.resolve("./download_handler");
+    let DownloadHandler = import.meta.resolve("./download_handler.ts");
     return handlerInstance.apiCall<DownloadHandler>(
       DownloadHandler,
       "application/x-download"
@@ -377,7 +377,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setParam(paramInstance);
-    let FileHandler = require.resolve("./file_handler");
+    let FileHandler = import.meta.resolve("./file_handler.ts");
     return handlerInstance.apiCall<FileHandler>(
       FileHandler,
       "application/json"
@@ -401,7 +401,7 @@ class RecordOperations {
     handlerInstance.setAPIPath(apiPath);
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setCategoryMethod(Constants.REQUEST_METHOD_DELETE);
-    let FileHandler = require.resolve("./file_handler");
+    let FileHandler = import.meta.resolve("./file_handler.ts");
     return handlerInstance.apiCall<FileHandler>(
       FileHandler,
       "application/json"
@@ -429,8 +429,8 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let MassUpdateActionHandler = require.resolve(
-      "./mass_update_action_handler"
+    let MassUpdateActionHandler = import.meta.resolve(
+      "./mass_update_action_handler.ts"
     );
     return handlerInstance.apiCall<MassUpdateActionHandler>(
       MassUpdateActionHandler,
@@ -456,8 +456,8 @@ class RecordOperations {
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
-    let MassUpdateResponseHandler = require.resolve(
-      "./mass_update_response_handler"
+    let MassUpdateResponseHandler = import.meta.resolve(
+      "./mass_update_response_handler.ts"
     );
     return handlerInstance.apiCall<MassUpdateResponseHandler>(
       MassUpdateResponseHandler,
@@ -486,7 +486,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -518,7 +518,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -546,7 +546,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -578,7 +578,7 @@ class RecordOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -603,7 +603,7 @@ class RecordOperations {
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
-    let CountHandler = require.resolve("./count_handler");
+    let CountHandler = import.meta.resolve("./count_handler.ts");
     return handlerInstance.apiCall<CountHandler>(
       CountHandler,
       "application/json"
@@ -635,7 +635,7 @@ class RecordOperations {
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -669,7 +669,7 @@ class RecordOperations {
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setHeader(headerInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -700,7 +700,7 @@ class RecordOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setHeader(headerInstance);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -729,7 +729,7 @@ class RecordOperations {
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -755,7 +755,7 @@ class RecordOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -781,7 +781,7 @@ class RecordOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_CREATE);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName(this.moduleAPIName);
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"

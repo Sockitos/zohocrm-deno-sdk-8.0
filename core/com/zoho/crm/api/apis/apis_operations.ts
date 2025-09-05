@@ -37,7 +37,7 @@ class APIsOperations {
       .catch((err) => {
         throw err;
       });
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"

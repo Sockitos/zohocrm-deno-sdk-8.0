@@ -1,50 +1,53 @@
-import { createRequire } from "node:module";
-import {ResponseHandler} from "./response_handler.ts"
-import {Param} from "../../../../../../routes/param.ts"
-import {SDKException} from "../exception/sdk_exception.ts"
-import {APIResponse} from "../../../../../../routes/controllers/api_response.ts"
-import {CommonAPIHandler} from "../../../../../../routes/middlewares/common_api_handler.ts"
-import { Constants } from "../../../../../../utils/util/constants.ts"
+import { APIResponse } from "../../../../../../routes/controllers/api_response.ts";
+import { CommonAPIHandler } from "../../../../../../routes/middlewares/common_api_handler.ts";
+import { Param } from "../../../../../../routes/param.ts";
+import { Constants } from "../../../../../../utils/util/constants.ts";
+import { ResponseHandler } from "./response_handler.ts";
 
+class FromAddressesOperations {
+  private userId?: string;
+  /**
+   * Creates an instance of FromAddressesOperations with the given parameters
+   * @param userId A String representing the userId
+   */
+  constructor(userId?: string) {
+    this.userId = userId;
+  }
 
-const require = createRequire(import.meta.url);
-class FromAddressesOperations{
-
-	private userId?: string;
-	/**
-	 * Creates an instance of FromAddressesOperations with the given parameters
-	 * @param userId A String representing the userId
-	 */
-	constructor(userId?: string){
-		this.userId = userId;
-
-	}
-
-	/**
-	 * The method to get from addresses
-	 * @returns An instance of APIResponse<ResponseHandler>
-	 * @throws SDKException
-	 */
-	public async getFromAddresses(): Promise<APIResponse<ResponseHandler>>	{
-		let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
-		let apiPath: string = '';
-		apiPath = apiPath.concat("/crm/v8/settings/emails/actions/from_addresses");
-		handlerInstance.setAPIPath(apiPath);
-		handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
-		handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
-		await handlerInstance.addParam(new Param<string>("user_id", "com.zoho.crm.api.FromAddresses.GetFromAddressesParam"), this.userId).catch(err => { throw err; });
-		let ResponseHandler = require.resolve("./response_handler");
-		return handlerInstance.apiCall<ResponseHandler>(ResponseHandler, "application/json");
-
-	}
-
+  /**
+   * The method to get from addresses
+   * @returns An instance of APIResponse<ResponseHandler>
+   * @throws SDKException
+   */
+  public async getFromAddresses(): Promise<APIResponse<ResponseHandler>> {
+    let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
+    let apiPath: string = "";
+    apiPath = apiPath.concat("/crm/v8/settings/emails/actions/from_addresses");
+    handlerInstance.setAPIPath(apiPath);
+    handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
+    handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
+    await handlerInstance
+      .addParam(
+        new Param<string>(
+          "user_id",
+          "com.zoho.crm.api.FromAddresses.GetFromAddressesParam"
+        ),
+        this.userId
+      )
+      .catch((err) => {
+        throw err;
+      });
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
+    return handlerInstance.apiCall<ResponseHandler>(
+      ResponseHandler,
+      "application/json"
+    );
+  }
 }
-class GetFromAddressesParam{
-
-}
+class GetFromAddressesParam {}
 
 export {
-	GetFromAddressesParam as GetFromAddressesParam,
-	FromAddressesOperations as MasterModel,
-	FromAddressesOperations as FromAddressesOperations
-}
+  FromAddressesOperations as FromAddressesOperations,
+  GetFromAddressesParam as GetFromAddressesParam,
+  FromAddressesOperations as MasterModel,
+};

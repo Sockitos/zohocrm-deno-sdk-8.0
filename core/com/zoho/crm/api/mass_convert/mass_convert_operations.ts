@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import { APIResponse } from "../../../../../../routes/controllers/api_response.ts";
 import { CommonAPIHandler } from "../../../../../../routes/middlewares/common_api_handler.ts";
 import { Param } from "../../../../../../routes/param.ts";
@@ -8,7 +7,6 @@ import { ActionResponse } from "./action_response.ts";
 import { BodyWrapper } from "./body_wrapper.ts";
 import { ResponseHandler } from "./response_handler.ts";
 
-const require = createRequire(import.meta.url);
 class MassConvertOperations {
   /**
    * The method to mass convert
@@ -29,7 +27,7 @@ class MassConvertOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName("Deals");
-    let ActionResponse = require.resolve("./action_response");
+    let ActionResponse = import.meta.resolve("./action_response.ts");
     return handlerInstance.apiCall<ActionResponse>(
       ActionResponse,
       "application/json"
@@ -52,7 +50,7 @@ class MassConvertOperations {
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_ACTION);
     handlerInstance.setParam(paramInstance);
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"

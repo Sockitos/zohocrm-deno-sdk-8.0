@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import { APIResponse } from "../../../../../../routes/controllers/api_response.ts";
 import { CommonAPIHandler } from "../../../../../../routes/middlewares/common_api_handler.ts";
 import { Param } from "../../../../../../routes/param.ts";
@@ -8,7 +7,6 @@ import { ActionHandler } from "./action_handler.ts";
 import { BodyWrapper } from "./body_wrapper.ts";
 import { ResponseHandler } from "./response_handler.ts";
 
-const require = createRequire(import.meta.url);
 class RecordLockingOperations {
   private moduleName: string;
   private recordId: bigint;
@@ -43,7 +41,7 @@ class RecordLockingOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setModuleAPIName("Locking_Information__s");
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -73,7 +71,7 @@ class RecordLockingOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName("Locking_Information__s");
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -104,7 +102,7 @@ class RecordLockingOperations {
     handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
     handlerInstance.setParam(paramInstance);
     handlerInstance.setModuleAPIName("Locking_Information__s");
-    let ResponseHandler = require.resolve("./response_handler");
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
     return handlerInstance.apiCall<ResponseHandler>(
       ResponseHandler,
       "application/json"
@@ -137,7 +135,7 @@ class RecordLockingOperations {
     handlerInstance.setRequest(request);
     handlerInstance.setMandatoryChecker(true);
     handlerInstance.setModuleAPIName("Locking_Information__s");
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"
@@ -165,7 +163,7 @@ class RecordLockingOperations {
     handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setCategoryMethod(Constants.REQUEST_METHOD_DELETE);
     handlerInstance.setModuleAPIName("Locking_Information__s");
-    let ActionHandler = require.resolve("./action_handler");
+    let ActionHandler = import.meta.resolve("./action_handler.ts");
     return handlerInstance.apiCall<ActionHandler>(
       ActionHandler,
       "application/json"

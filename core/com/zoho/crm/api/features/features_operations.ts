@@ -1,105 +1,119 @@
-import { createRequire } from "node:module";
-import {APIException} from "./api_exception.ts"
-import {ResponseHandler} from "./response_handler.ts"
-import {Param} from "../../../../../../routes/param.ts"
-import {ParameterMap} from "../../../../../../routes/parameter_map.ts"
-import {SDKException} from "../exception/sdk_exception.ts"
-import {APIResponse} from "../../../../../../routes/controllers/api_response.ts"
-import {CommonAPIHandler} from "../../../../../../routes/middlewares/common_api_handler.ts"
-import { Constants } from "../../../../../../utils/util/constants.ts"
+import { APIResponse } from "../../../../../../routes/controllers/api_response.ts";
+import { CommonAPIHandler } from "../../../../../../routes/middlewares/common_api_handler.ts";
+import { Param } from "../../../../../../routes/param.ts";
+import { ParameterMap } from "../../../../../../routes/parameter_map.ts";
+import { Constants } from "../../../../../../utils/util/constants.ts";
+import { ResponseHandler } from "./response_handler.ts";
 
+class FeaturesOperations {
+  /**
+   * The method to get feature details
+   * @param paramInstance An instance of ParameterMap
+   * @returns An instance of APIResponse<ResponseHandler>
+   * @throws SDKException
+   */
+  public async getFeatureDetails(
+    paramInstance?: ParameterMap
+  ): Promise<APIResponse<ResponseHandler>> {
+    let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
+    let apiPath: string = "";
+    apiPath = apiPath.concat("/crm/v8/__features");
+    handlerInstance.setAPIPath(apiPath);
+    handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
+    handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
+    handlerInstance.setParam(paramInstance);
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
+    return handlerInstance.apiCall<ResponseHandler>(
+      ResponseHandler,
+      "application/json"
+    );
+  }
 
-const require = createRequire(import.meta.url);
-class FeaturesOperations{
-	/**
-	 * The method to get feature details
-	 * @param paramInstance An instance of ParameterMap
-	 * @returns An instance of APIResponse<ResponseHandler>
-	 * @throws SDKException
-	 */
-	public async getFeatureDetails(paramInstance?: ParameterMap): Promise<APIResponse<ResponseHandler>>	{
-		let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
-		let apiPath: string = '';
-		apiPath = apiPath.concat("/crm/v8/__features");
-		handlerInstance.setAPIPath(apiPath);
-		handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
-		handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
-		handlerInstance.setParam(paramInstance);
-		let ResponseHandler = require.resolve("./response_handler");
-		return handlerInstance.apiCall<ResponseHandler>(ResponseHandler, "application/json");
+  /**
+   * The method to get feature detail
+   * @param featureAPIName A String representing the featureAPIName
+   * @param paramInstance An instance of ParameterMap
+   * @returns An instance of APIResponse<ResponseHandler>
+   * @throws SDKException
+   */
+  public async getFeatureDetail(
+    featureAPIName: string,
+    paramInstance?: ParameterMap
+  ): Promise<APIResponse<ResponseHandler>> {
+    let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
+    let apiPath: string = "";
+    apiPath = apiPath.concat("/crm/v8/__features/");
+    apiPath = apiPath.concat(featureAPIName.toString());
+    handlerInstance.setAPIPath(apiPath);
+    handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
+    handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
+    handlerInstance.setParam(paramInstance);
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
+    return handlerInstance.apiCall<ResponseHandler>(
+      ResponseHandler,
+      "application/json"
+    );
+  }
 
-	}
+  /**
+   * The method to get data enrichment
+   * @returns An instance of APIResponse<ResponseHandler>
+   * @throws SDKException
+   */
+  public async getDataEnrichment(): Promise<APIResponse<ResponseHandler>> {
+    let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
+    let apiPath: string = "";
+    apiPath = apiPath.concat("/crm/v8/__features/data_enrichment");
+    handlerInstance.setAPIPath(apiPath);
+    handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
+    handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
+    return handlerInstance.apiCall<ResponseHandler>(
+      ResponseHandler,
+      "application/json"
+    );
+  }
 
-	/**
-	 * The method to get feature detail
-	 * @param featureAPIName A String representing the featureAPIName
-	 * @param paramInstance An instance of ParameterMap
-	 * @returns An instance of APIResponse<ResponseHandler>
-	 * @throws SDKException
-	 */
-	public async getFeatureDetail(featureAPIName: string, paramInstance?: ParameterMap): Promise<APIResponse<ResponseHandler>>	{
-		let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
-		let apiPath: string = '';
-		apiPath = apiPath.concat("/crm/v8/__features/");
-		apiPath = apiPath.concat(featureAPIName.toString());
-		handlerInstance.setAPIPath(apiPath);
-		handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
-		handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
-		handlerInstance.setParam(paramInstance);
-		let ResponseHandler = require.resolve("./response_handler");
-		return handlerInstance.apiCall<ResponseHandler>(ResponseHandler, "application/json");
-
-	}
-
-	/**
-	 * The method to get data enrichment
-	 * @returns An instance of APIResponse<ResponseHandler>
-	 * @throws SDKException
-	 */
-	public async getDataEnrichment(): Promise<APIResponse<ResponseHandler>>	{
-		let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
-		let apiPath: string = '';
-		apiPath = apiPath.concat("/crm/v8/__features/data_enrichment");
-		handlerInstance.setAPIPath(apiPath);
-		handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
-		handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
-		let ResponseHandler = require.resolve("./response_handler");
-		return handlerInstance.apiCall<ResponseHandler>(ResponseHandler, "application/json");
-
-	}
-
-	/**
-	 * The method to get user licences count
-	 * @returns An instance of APIResponse<ResponseHandler>
-	 * @throws SDKException
-	 */
-	public async getUserLicencesCount(): Promise<APIResponse<ResponseHandler>>	{
-		let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
-		let apiPath: string = '';
-		apiPath = apiPath.concat("/crm/v8/__features/user_licenses");
-		handlerInstance.setAPIPath(apiPath);
-		handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
-		handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
-		let ResponseHandler = require.resolve("./response_handler");
-		return handlerInstance.apiCall<ResponseHandler>(ResponseHandler, "application/json");
-
-	}
-
+  /**
+   * The method to get user licences count
+   * @returns An instance of APIResponse<ResponseHandler>
+   * @throws SDKException
+   */
+  public async getUserLicencesCount(): Promise<APIResponse<ResponseHandler>> {
+    let handlerInstance: CommonAPIHandler = new CommonAPIHandler();
+    let apiPath: string = "";
+    apiPath = apiPath.concat("/crm/v8/__features/user_licenses");
+    handlerInstance.setAPIPath(apiPath);
+    handlerInstance.setHttpMethod(Constants.REQUEST_METHOD_GET);
+    handlerInstance.setCategoryMethod(Constants.REQUEST_CATEGORY_READ);
+    let ResponseHandler = import.meta.resolve("./response_handler.ts");
+    return handlerInstance.apiCall<ResponseHandler>(
+      ResponseHandler,
+      "application/json"
+    );
+  }
 }
-class GetFeatureDetailsParam{
-
-	public static MODULE: Param<string> = new Param<string>("module", "com.zoho.crm.api.Features.GetFeatureDetailsParam");
-	public static API_NAMES: Param<string> = new Param<string>("api_names", "com.zoho.crm.api.Features.GetFeatureDetailsParam");
+class GetFeatureDetailsParam {
+  public static MODULE: Param<string> = new Param<string>(
+    "module",
+    "com.zoho.crm.api.Features.GetFeatureDetailsParam"
+  );
+  public static API_NAMES: Param<string> = new Param<string>(
+    "api_names",
+    "com.zoho.crm.api.Features.GetFeatureDetailsParam"
+  );
 }
 
-class GetFeatureDetailParam{
-
-	public static MODULE: Param<string> = new Param<string>("module", "com.zoho.crm.api.Features.GetFeatureDetailParam");
+class GetFeatureDetailParam {
+  public static MODULE: Param<string> = new Param<string>(
+    "module",
+    "com.zoho.crm.api.Features.GetFeatureDetailParam"
+  );
 }
 
 export {
-	GetFeatureDetailParam as GetFeatureDetailParam,
-	GetFeatureDetailsParam as GetFeatureDetailsParam,
-	FeaturesOperations as MasterModel,
-	FeaturesOperations as FeaturesOperations
-}
+  FeaturesOperations as FeaturesOperations,
+  GetFeatureDetailParam as GetFeatureDetailParam,
+  GetFeatureDetailsParam as GetFeatureDetailsParam,
+  FeaturesOperations as MasterModel,
+};
