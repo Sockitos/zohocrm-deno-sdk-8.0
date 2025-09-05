@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitOverride": false,
+    "noImplicitAny": false
+  },
+  "imports": {
+    "winston": "npm:winston@^3.2.1",
+    "form-data": "npm:form-data@^3.0.0",
+    "got": "npm:got@^11.8.1",
+    "moment-timezone": "npm:moment-timezone@0.5.43",
+    "tunnel": "npm:tunnel@0.0.6"
+  },
+  "tasks": {
+    "test": "deno test --allow-all",
+    "build": "deno compile --allow-all index.ts",
+    "dev": "deno run --allow-all --watch index.ts",
+    "fix-imports": "deno run --allow-read --allow-write fix-imports.ts",
+    "check": "deno check **/*.ts",
+    "fmt": "deno fmt",
+    "lint": "deno lint"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 120,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve"
+  },
+  "permissions": {
+    "net": true,
+    "read": true,
+    "write": true,
+    "env": true
+  }
+}
