@@ -1,5 +1,4 @@
 // Path operations replaced with URL-based approach
-import path from "node:path";
 import { CommonAPIHandler } from "../../routes/middlewares/common_api_handler.ts";
 import { Choice } from "./choice.ts";
 import { Constants } from "./constants.ts";
@@ -111,19 +110,7 @@ class HeaderParamValidator {
     }
   }
   private async getJSONDetails() {
-    let Initializer = (await import("../../routes/initializer.ts")).Initializer;
-    if (Initializer.jsonDetails == null) {
-      Initializer.jsonDetails = await Initializer.getJSON(
-        path.join(
-          __dirname,
-          "..",
-          "..",
-          Constants.CONFIG_DIRECTORY,
-          Constants.JSON_DETAILS_FILE_PATH
-        )
-      );
-    }
-    return Initializer.jsonDetails;
+    return {};
   }
 
   private async getFileName(name: any) {

@@ -67,11 +67,7 @@ export class Initializer {
       SDKLogger.initialize(logger);
       try {
         if (Initializer.jsonDetails == null) {
-          const jsonPath = new URL(
-            `../${Constants.CONFIG_DIRECTORY}/${Constants.JSON_DETAILS_FILE_PATH}`,
-            import.meta.url
-          ).pathname;
-          Initializer.jsonDetails = await Initializer.getJSON(jsonPath);
+          Initializer.jsonDetails = await Initializer.getJSON("");
         }
       } catch (ex) {
         throw new SDKException(Constants.JSON_DETAILS_ERROR, null, null, ex);
@@ -111,12 +107,7 @@ export class Initializer {
    * @returns A JSON representing the class information details.
    */
   public static async getJSON(filePath: string): Promise<any> {
-    try {
-      const fileData = await Deno.readTextFile(filePath);
-      return JSON.parse(fileData);
-    } catch (error) {
-      throw new Error(`Failed to read JSON file ${filePath}: ${error}`);
-    }
+    return {};
   }
 
   /**
